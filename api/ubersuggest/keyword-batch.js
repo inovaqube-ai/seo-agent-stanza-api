@@ -147,7 +147,111 @@ const MOCK_KEYWORDS = {
     cpc: 1.18,
     intent: "transacional local",
     keyword_type: "Transacional + Local + Long-tail"
-  }
+  },
+  "comprar apartamento em aracaju": {
+  search_volume: 520,
+  seo_difficulty: 33,
+  paid_difficulty: 19,
+  cpc: 1.66,
+  intent: "transacional local",
+  keyword_type: "Transacional + Local + Long-tail"
+},
+"apartamento financiado em aracaju": {
+  search_volume: 260,
+  seo_difficulty: 28,
+  paid_difficulty: 15,
+  cpc: 1.37,
+  intent: "transacional local",
+  keyword_type: "Transacional + Local + Long-tail"
+},
+"lançamento imobiliário em aracaju": {
+  search_volume: 210,
+  seo_difficulty: 30,
+  paid_difficulty: 17,
+  cpc: 1.51,
+  intent: "comercial local",
+  keyword_type: "Comercial + Local + Long-tail"
+},
+"empreendimento em aracaju": {
+  search_volume: 320,
+  seo_difficulty: 28,
+  paid_difficulty: 15,
+  cpc: 1.22,
+  intent: "comercial local",
+  keyword_type: "Comercial + Local"
+},
+"imóveis em aracaju": {
+  search_volume: 1900,
+  seo_difficulty: 42,
+  paid_difficulty: 25,
+  cpc: 1.74,
+  intent: "comercial local",
+  keyword_type: "Comercial + Local"
+},
+"apartamento em atalaia aracaju": {
+  search_volume: 260,
+  seo_difficulty: 27,
+  paid_difficulty: 15,
+  cpc: 1.32,
+  intent: "transacional local",
+  keyword_type: "Transacional + Local + Long-tail"
+},
+"apartamento na aruana aracaju": {
+  search_volume: 210,
+  seo_difficulty: 25,
+  paid_difficulty: 14,
+  cpc: 1.21,
+  intent: "transacional local",
+  keyword_type: "Transacional + Local + Long-tail"
+},
+"apartamento em aruana aracaju": {
+  search_volume: 210,
+  seo_difficulty: 25,
+  paid_difficulty: 14,
+  cpc: 1.21,
+  intent: "transacional local",
+  keyword_type: "Transacional + Local + Long-tail"
+},
+"apartamento perto do aeroporto aracaju": {
+  search_volume: 90,
+  seo_difficulty: 22,
+  paid_difficulty: 11,
+  cpc: 1.08,
+  intent: "transacional local",
+  keyword_type: "Transacional + Local + Long-tail"
+},
+"apartamento 2 quartos em aracaju": {
+  search_volume: 480,
+  seo_difficulty: 32,
+  paid_difficulty: 18,
+  cpc: 1.44,
+  intent: "transacional local",
+  keyword_type: "Transacional + Local + Long-tail"
+},
+"apartamento 3 quartos em aracaju": {
+  search_volume: 260,
+  seo_difficulty: 30,
+  paid_difficulty: 16,
+  cpc: 1.39,
+  intent: "transacional local",
+  keyword_type: "Transacional + Local + Long-tail"
+},
+"apartamento com suíte em aracaju": {
+  search_volume: 170,
+  seo_difficulty: 26,
+  paid_difficulty: 13,
+  cpc: 1.18,
+  intent: "transacional local",
+  keyword_type: "Transacional + Local + Long-tail"
+},
+"apartamento com lazer em aracaju": {
+  search_volume: 140,
+  seo_difficulty: 24,
+  paid_difficulty: 12,
+  cpc: 1.12,
+  intent: "transacional local",
+  keyword_type: "Transacional + Local + Long-tail"
+}
 };
 
 function normalizeKeyword(value) {
