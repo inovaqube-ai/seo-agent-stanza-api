@@ -339,24 +339,47 @@ export default async function handler(req, res) {
       const difficultyData = difficultyMap.get(key) || {};
 
       const seoDifficulty = difficultyData.keyword_difficulty ?? null;
-      const searchVolume = volumeData.search_volume ?? null;
-      const cpc = volumeData.cpc ?? null;
+const searchVolume = volumeData.search_volume ?? null;
+const cpc = volumeData.cpc ?? null;
+const paidCompetitionIndex = volumeData.paid_competition_index ?? null;
 
-      const hasAnyData =
-        searchVolume !== null ||
-        seoDifficulty !== null ||
-        cpc !== null ||
-        volumeData.paid_competition_index !== null;
+let rankingDifficulty = null;
+let rankingDifficultySource = "not_available";
+let rankingDifficultyLabel = "N/D";
 
-      return {
-        keyword,
-        search_volume: searchVolume,
-        seo_difficulty: seoDifficulty,
-        difficulty_percent: seoDifficulty !== null ? `${seoDifficulty}%` : null,
-        difficulty_level: getDifficultyLevel(seoDifficulty),
-        cpc,
-        paid_competition: volumeData.paid_competition ?? null,
-        paid_competition_index: volumeData.paid_competition_index ?? null,
+if (seoDifficulty !== null && seoDifficulty !== undefined) {
+  rankingDifficulty = Number(seoDifficulty);
+  rankingDifficultySource = "seo_difficulty";
+  rankingDifficultyLabel = "SEO difficulty";
+} else if (paidCompetitionIndex !== null && paidCompetitionIndex !== undefined) {
+  rankingDifficulty = Number(paidCompetitionIndex);
+  rankingDifficultySource = "estimated_from_paid_competition";
+  rankingDifficultyLabel = "Estimada por competição paga";
+}
+
+const hasAnyData =
+  searchVolume !== null ||
+  seoDifficulty !== null ||
+  cpc !== null ||
+  paidCompetitionIndex !== null;
+
+return {
+  keyword,
+  search_volume: searchVolume,
+
+  seo_difficulty: seoDifficulty,
+  difficulty_percent: seoDifficulty !== null ? `${seoDifficulty}%` : null,
+  difficulty_level: getDifficultyLevel(seoDifficulty),
+
+  ranking_difficulty: rankingDifficulty,
+  ranking_difficulty_percent: rankingDifficulty !== null ? `${rankingDifficulty}%` : null,
+  ranking_difficulty_level: getDifficultyLevel(rankingDifficulty),
+  ranking_difficulty_source: rankingDifficultySource,
+  ranking_difficulty_label: rankingDifficultyLabel,
+
+  cpc,
+  paid_competition: volumeData.paid_competition ?? null,
+  paid_competition_index: paidCompetitionIndex,
         low_top_of_page_bid: volumeData.low_top_of_page_bid ?? null,
         high_top_of_page_bid: volumeData.high_top_of_page_bid ?? null,
         intent: classifyIntent(keyword),
@@ -387,11 +410,13 @@ export default async function handler(req, res) {
       updated_at: new Date().toISOString(),
       keywords: responseKeywords,
       notes: [
-        "search_volume, cpc e paid_competition vêm da DataForSEO Google Ads Keywords Data.",
-        "seo_difficulty vem da DataForSEO Labs Bulk Keyword Difficulty.",
-        "competition_index é métrica de competição paga, não dificuldade orgânica.",
-        "seo_difficulty é a métrica orgânica usada para dificuldade de rankeamento."
-      ]
+  "search_volume, cpc e paid_competition vêm da DataForSEO Google Ads Keywords Data.",
+  "seo_difficulty vem da DataForSEO Labs Bulk Keyword Difficulty.",
+  "ranking_difficulty usa seo_difficulty quando disponível.",
+  "Quando seo_difficulty não está disponível, ranking_difficulty usa paid_competition_index como estimativa.",
+  "ranking_difficulty_source indica se a dificuldade é oficial de SEO ou estimada por competição paga.",
+  "paid_competition_index é métrica de competição paga, não dificuldade orgânica oficial."
+]
     });
   } catch (error) {
     return res.status(500).json({
